@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import Signup from './components/sign-up'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         sunset at a lake? The neon lights of a traffic light at night?</p>
 
       <p className="uk-text-center"><strong>Share what you see, here.</strong></p>
+      <Signup />
     </div>
   );
 }
