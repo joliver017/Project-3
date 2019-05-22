@@ -43,7 +43,7 @@ class SignupForm extends Component {
 
 		return (
 			<div className="SignupForm">
-				<div className="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center">
+				<div className="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center uk-box-shadow-large">
         			{/* <h1 className="uk-card-title uk-text-center">SWYSH</h1> */}
 					<h4 className="uk-text-center">share what you see, hear</h4>
 					<p>Welcome to SWYSH, an app whose sole purpose is for users to share pictures
