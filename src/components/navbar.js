@@ -39,6 +39,8 @@ class Navbar extends Component {
                         <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
                             <div class="uk-navbar-left">
                                 <ul class="uk-navbar-nav">
+                                    <li class="uk-active"><Link to="/">Home</Link></li>
+                                    <li class="uk-active"><Link to="/create-post">Create a Post</Link></li>
                                     <li class="uk-active"><Link to="#" onClick={this.logout}>Logout</Link></li>
                                 </ul>
                             </div>
@@ -47,7 +49,6 @@ class Navbar extends Component {
                         <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
                         <div class="uk-navbar-left">
                             <ul class="uk-navbar-nav">
-                                <li class="uk-active"><Link to="/">Home</Link></li>
                                 <li class="uk-active"><Link to="/login">Login</Link></li>
                                 <li class="uk-active"><Link to="/signup">Signup</Link></li>
                             </ul>
