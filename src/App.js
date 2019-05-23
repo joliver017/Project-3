@@ -7,6 +7,7 @@ import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
+import CreatePost from './components/create-post'
 
 class App extends Component {
   constructor() {
@@ -75,6 +76,13 @@ class App extends Component {
           render={() =>
             <Signup
               signup={this.signup}
+            />}
+        />
+        <Route
+          path="/create-post"
+          render={() =>
+            <CreatePost
+              createpost={this.createpost}
             />}
         />
 
