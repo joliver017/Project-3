@@ -17,5 +17,15 @@ router.post('/', (req, res) => {
         }
     )
 
+router.get('/', (req, res) => {
+    Post.find({ }, (err, post) => {
+        if (err) {
+            console.log('Post.js post error: ', err)
+        } else if (post) {
+            res.json({ post: post })
+        }
+})
+})
+
 
 module.exports = router

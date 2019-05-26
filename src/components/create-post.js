@@ -146,7 +146,7 @@ class CreatePost extends Component {
                 </div>
                 
             )
-        }
+        } 
     }
 }
 
