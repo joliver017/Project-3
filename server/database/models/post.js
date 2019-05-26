@@ -2,11 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    songTitle: String,
-    songArtist: String,
-    songAudio: String,
+    songURL: String,
     imageURL: String,
-    userCreator: String,
 });
 
 const Post = mongoose.model("Post", postSchema);
