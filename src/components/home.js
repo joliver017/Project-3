@@ -38,7 +38,7 @@ class Home extends Component {
             <div>
                 {this.state.posts.map(result => {
                     return (
-                        <div key={result.id} className="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center">
+                        <div key={result._id} className="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center">
                             <img style={imageStyle} src={result.imageURL} alt="post-img" />
                             <audio controls src={result.songURL}>
                                 Your browser does not support the

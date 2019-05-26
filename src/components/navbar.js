@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from '../logo.svg';
 import '../App.css';
 import axios from 'axios'
@@ -36,21 +35,21 @@ class Navbar extends Component {
             <div>
                 <div>
                     {loggedIn ? (
-                        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-                            <div class="uk-navbar-left">
-                                <ul class="uk-navbar-nav">
-                                    <li class="uk-active"><Link to="/">Home</Link></li>
-                                    <li class="uk-active"><Link to="/create-post">Create a Post</Link></li>
-                                    <li class="uk-active"><Link to="#" onClick={this.logout}>Logout</Link></li>
+                        <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar>
+                            <div className="uk-navbar-left">
+                                <ul className="uk-navbar-nav">
+                                    <li className="uk-active"><Link to="/">Home</Link></li>
+                                    <li className="uk-active"><Link to="/create-post">Create a Post</Link></li>
+                                    <li className="uk-active"><Link to="#" onClick={this.logout}>Logout</Link></li>
                                 </ul>
                             </div>
                         </nav>
                     ) : (
-                        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-                        <div class="uk-navbar-left">
-                            <ul class="uk-navbar-nav">
-                                <li class="uk-active"><Link to="/login">Login</Link></li>
-                                <li class="uk-active"><Link to="/signup">Signup</Link></li>
+                        <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar>
+                        <div className="uk-navbar-left">
+                            <ul className="uk-navbar-nav">
+                                <li className="uk-active"><Link to="/login">Login</Link></li>
+                                <li className="uk-active"><Link to="/signup">Signup</Link></li>
                             </ul>
                         </div>
                     </nav>
