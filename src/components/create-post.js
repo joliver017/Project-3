@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
-var SpotifyWebApi = require('spotify-web-api-node')
-var spotifyApi = new SpotifyWebApi({
-  });
-spotifyApi.setAccessToken('BQBwLxWW_lUS9g4-KJUPPPxfVy3WVd5iK8hAXPIy2vgTnMlqswIJRylRp2G5HTwG-I-SHhL2qV58tCCo0VSPp9FgolIqlKLwc1B6lwVlBHoQMUHYOZCe3YOkBLmMJR2Nypn29vLbWJDTc0TRSA');
 
 class CreatePost extends Component {
 	constructor() {
@@ -13,6 +8,7 @@ class CreatePost extends Component {
 		this.state = {
             songSearch: '',
             imageURL: '',
+            results: []
 			
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,19 +22,20 @@ class CreatePost extends Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault()
-        console.log('making api call: ');
         console.log(this.state.songSearch);
-        //request to server here
-        spotifyApi.searchTracks(this.state.songSearch).then(
-            function(data) {
-            //   console.log('songs', data.body);
-            console.log(data.body.tracks.items[0].preview_url)
-            },
-            function(err) {
-              console.error(err);
-            }
-          );
+        axios.get("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + this.state.songSearch, {
+            headers: {"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+            "X-RapidAPI-Key": "VwBkkUjee8mshUczPJAWhqmghmfOp1wkDcAjsnzUBZLMu5MyqJ"}
+        })
+        .then(response => {
+            this.setState({ results: response.data.data })
+            console.log(this.state.results);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
+
     
 	render() {
         return (
@@ -48,16 +45,7 @@ class CreatePost extends Component {
                     <h4 className="uk-text-center">Create a Post</h4>
                 </div>
 
-                <h1 className="uk-text-center">Search for a Song</h1>
-                <label htmlFor="song">Song: </label>
-                <input
-                    className="uk-input uk-margin uk-width-1-2"
-                    type="text"
-                    name="songSearch"
-                    value={this.state.song}
-                    onChange={this.handleChange}
-                />
-                <br></br>
+                <h1 className="uk-text-center">Paste Image URL</h1>
                 <label htmlFor="imageURL">Image URL: </label>
                 <input
                     className="uk-input uk-margin uk-width-1-2"
@@ -66,9 +54,54 @@ class CreatePost extends Component {
                     value={this.state.imageURL}
                     onChange={this.handleChange}
                 />
+
+                <h1 className="uk-text-center">Search for a Song</h1>
+                <label htmlFor="song">Song Title: </label>
+                <input
+                    className="uk-input uk-margin uk-width-1-2"
+                    type="text"
+                    name="songSearch"
+                    value={this.state.songSearch}
+                    onChange={this.handleChange}
+                />
+                <button className="uk-button uk-button-default uk-align-center" onClick={this.handleSubmit}>Find Song</button>
+
+                <br></br>
                 
                 <button className="uk-button uk-button-default uk-align-center" onClick={this.handleSubmit}>Share</button>
+
+                {/* <div className="searchResults">
+                    <audio controls src='https://p.scdn.co/mp3-preview/535e787823a5ba08391ec264157e162bfaac8395?cid=774b29d4f13844c495f206cafdad9c86'></audio>
+                </div> */}
+                <table className="uk-table">
+                <thead>
+                    <tr>
+                        <th className="uk-text-center">Song Title</th>
+                        <th className="uk-text-center">Song Artist</th>
+                        <th className="uk-text-center">30 Sec Preview URL</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td>Song Title</td>
+                        <td>Song Artist</td>
+                        <td>Preview URL</td>
+                    </tr>
+                </tfoot>
+                <tbody>                
+                    {this.state.results.map(result => {
+                        return (
+                            <tr key={result.id}>
+                                <td>{result.title}</td>
+                                <td>{result.artist.name}</td>
+                                <td>{result.preview}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+                </table>
             </div>
+            
         )
     }
 }

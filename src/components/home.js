@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 class Home extends Component {
-    constructor() {
-        super()
-    }
+    // constructor() {
+    //     super()
+    // }
 
 
     render() {
@@ -13,7 +13,7 @@ class Home extends Component {
         return (
             <div>
                 <p>Feed will go here</p>
-                <img style={imageStyle} src="https://i.ytimg.com/vi/N1icEHtgb3g/maxresdefault.jpg" />
+                <img style={imageStyle} src="https://i.ytimg.com/vi/N1icEHtgb3g/maxresdefault.jpg" alt="test" />
             </div>
         )
 

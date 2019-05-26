@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    title: String,
+    songTitle: String,
+    songArtist: String,
     songAudio: String,
+    imageURL: String,
     userCreator: String,
 });
 
