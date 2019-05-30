@@ -44,7 +44,8 @@ class Home extends Component {
                                 Your browser does not support the
                                 <code>audio</code> element.
                             </audio>
-                            <h4>{result.songTitle} by {result.songArtist}</h4>
+                            <h4><strong>{result.songTitle}</strong> <br></br> by {result.songArtist}</h4>
+                            <h5>creator: {result.username}</h5>
                         </div>
                     )
                 })}

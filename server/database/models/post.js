@@ -5,7 +5,8 @@ const postSchema = new Schema({
     songURL: String,
     imageURL: String,
     songTitle: String,
-    songArtist: String
+    songArtist: String,
+    username: String
 });
 
 const Post = mongoose.model("Post", postSchema);

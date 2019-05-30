@@ -11,7 +11,8 @@ class CreatePost extends Component {
             imageURL: '',
             songURL: '',
             songTitle: '',
-            songArtist: ''
+            songArtist: '',
+            username: ''
 			
 		}
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -50,10 +51,12 @@ class CreatePost extends Component {
 			imageURL: this.state.imageURL,
             songURL: this.state.songURL,
             songTitle: this.state.songTitle,
-            songArtist: this.state.songArtist
+            songArtist: this.state.songArtist,
+            username: this.state.username
 		})
 			.then(response => {
-				console.log(response)
+                console.log(response)
+                console.log(this.state.username)
 				if (!response.data.errmsg) {
 					console.log('successful post')
 					this.setState({
@@ -63,6 +66,26 @@ class CreatePost extends Component {
 					console.log('unsuccesful')
 				}
 			})
+    }
+
+    componentDidMount() {
+        this.getUser()
+    }
+
+    getUser() {
+        axios.get('/user/').then(response => {
+          if (response.data.user) {
+            this.setState({
+              loggedIn: true,
+              username: response.data.user.username
+            })
+          } else {
+            this.setState({
+              loggedIn: false,
+              username: null
+            })
+          }
+        })
     }
 
     

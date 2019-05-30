@@ -4,13 +4,14 @@ const Post = require('../database/models/post')
 
 router.post('/', (req, res) => {
 
-    const { imageURL, songURL, songTitle, songArtist } = req.body
+    const { imageURL, songURL, songTitle, songArtist, username } = req.body
 
             const newPost = new Post({
                 imageURL: imageURL,
                 songURL: songURL,
                 songTitle: songTitle,
-                songArtist: songArtist
+                songArtist: songArtist,
+                username: username
             })
             newPost.save((err, savedPost) => {
                 if (err) return res.json(err)
