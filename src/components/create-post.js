@@ -7,10 +7,11 @@ class CreatePost extends Component {
 	constructor() {
 		super()
 		this.state = {
-            songSearch: '',
             results: [],
             imageURL: '',
             songURL: '',
+            songTitle: '',
+            songArtist: ''
 			
 		}
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,8 +26,8 @@ class CreatePost extends Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault()
-        console.log(this.state.songSearch);
-        axios.get("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + this.state.songSearch, {
+        console.log(this.state.songTitle);
+        axios.get("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + (this.state.songTitle || this.state.songArtist), {
             headers: {"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
             "X-RapidAPI-Key": "VwBkkUjee8mshUczPJAWhqmghmfOp1wkDcAjsnzUBZLMu5MyqJ"}
         })
@@ -43,9 +44,13 @@ class CreatePost extends Component {
 		event.preventDefault()
         console.log(this.state.imageURL);
         console.log(this.state.songURL);
+        console.log(this.state.songTitle);
+        console.log(this.state.songArtist);
         axios.post('/post', {
 			imageURL: this.state.imageURL,
-			songURL: this.state.songURL
+            songURL: this.state.songURL,
+            songTitle: this.state.songTitle,
+            songArtist: this.state.songArtist
 		})
 			.then(response => {
 				console.log(response)
@@ -93,12 +98,21 @@ class CreatePost extends Component {
                     />
 
                     <h1 className="uk-text-center">Search for a Song</h1>
-                    <label htmlFor="song">Song Title: </label>
+                    <label htmlFor="songTitle">Song Title: </label>
                     <input
                         className="uk-input uk-margin uk-width-1-2"
                         type="text"
-                        name="songSearch"
-                        value={this.state.songSearch}
+                        name="songTitle"
+                        value={this.state.songTitle}
+                        onChange={this.handleChange}
+                    />
+                    <br></br>
+                    <label htmlFor="songArtist">Song Artist: </label>
+                    <input
+                        className="uk-input uk-margin uk-width-1-2"
+                        type="text"
+                        name="songArtist"
+                        value={this.state.songArtist}
                         onChange={this.handleChange}
                     />
                     <button className="uk-button uk-button-default uk-align-center" onClick={this.handleSubmit}>Find Song</button>
@@ -110,7 +124,7 @@ class CreatePost extends Component {
                     <table className="uk-table">
                     <thead>
                         <tr>
-                            <th className="uk-text-center">Select</th>
+                            <th className="uk-text-center"></th>
                             <th className="uk-text-center">Song Title</th>
                             <th className="uk-text-center">Song Artist</th>
                             <th className="uk-text-center">30 Sec Preview URL</th>
@@ -119,7 +133,7 @@ class CreatePost extends Component {
                     </thead>
                     <tfoot>
                         <tr>
-                            <td>Select</td>
+                            <td></td>
                             <td>Song Title</td>
                             <td>Song Artist</td>
                             <td>Preview URL</td>

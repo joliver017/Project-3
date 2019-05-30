@@ -36,7 +36,7 @@ class Home extends Component {
         }
         return (
             <div>
-                {this.state.posts.map(result => {
+                {this.state.posts.reverse().map(result => {
                     return (
                         <div key={result._id} className="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center">
                             <img style={imageStyle} src={result.imageURL} alt="post-img" />
@@ -44,6 +44,7 @@ class Home extends Component {
                                 Your browser does not support the
                                 <code>audio</code> element.
                             </audio>
+                            <h4>{result.songTitle} by {result.songArtist}</h4>
                         </div>
                     )
                 })}
