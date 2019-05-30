@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
+import { pseudoRandomBytes } from 'crypto';
+import { variableDeclarator } from '@babel/types';
 
 
 class CreatePost extends Component {
@@ -12,7 +14,8 @@ class CreatePost extends Component {
             songURL: '',
             songTitle: '',
             songArtist: '',
-            username: ''
+            username: '',
+            warning: ''
 			
 		}
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -47,6 +50,13 @@ class CreatePost extends Component {
         console.log(this.state.songURL);
         console.log(this.state.songTitle);
         console.log(this.state.songArtist);
+
+        if (this.state.imageURL === "" || this.state.songURL === "" || 
+            this.state.songTitle === "" || this.state.songArtist === "") {
+                console.log("not all fields entered")
+                this.setState({ warning: "Please fill out all fields!" })
+            }
+        else {
         axios.post('/post', {
 			imageURL: this.state.imageURL,
             songURL: this.state.songURL,
@@ -65,7 +75,8 @@ class CreatePost extends Component {
 				} else {
 					console.log('unsuccesful')
 				}
-			})
+            })
+        }
     }
 
     componentDidMount() {
@@ -97,10 +108,11 @@ class CreatePost extends Component {
                 <div className="CreatePost">
                     <div className="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center uk-box-shadow-large">
                         {/* <h1 className="uk-card-title uk-text-center">SWYSH</h1> */}
-                        <h4 className="uk-text-center">Create a Post</h4>
-                    </div>
+                        <h1 className="uk-text-center">Create a Post</h1>
+                        <span className="uk-text-center uk-text-danger">{this.state.warning}</span>
+                    
 
-                    <h1 className="uk-text-center">Paste Image URL</h1>
+                    <h3 className="uk-text-center">Paste Image URL</h3>
                     <label htmlFor="imageURL">Image URL: </label>
                     <input
                         className="uk-input uk-margin uk-width-1-2"
@@ -110,7 +122,7 @@ class CreatePost extends Component {
                         onChange={this.handleChange}
                     />
 
-                    <h1 className="uk-text-center">Paste Song URL</h1>
+                    <h3 className="uk-text-center">Paste Song URL</h3>
                     <label htmlFor="songURL">Song URL: </label>
                     <input
                         className="uk-input uk-margin uk-width-1-2"
@@ -120,7 +132,7 @@ class CreatePost extends Component {
                         onChange={this.handleChange}
                     />
 
-                    <h1 className="uk-text-center">Search for a Song</h1>
+                    <h3 className="uk-text-center">Search for a Song</h3>
                     <label htmlFor="songTitle">Song Title: </label>
                     <input
                         className="uk-input uk-margin uk-width-1-2"
@@ -139,10 +151,10 @@ class CreatePost extends Component {
                         onChange={this.handleChange}
                     />
                     <button className="uk-button uk-button-default uk-align-center" onClick={this.handleSubmit}>Find Song</button>
-
-                    <br></br>
                     
-                    <button className="uk-button uk-button-default uk-align-center" onClick={this.handleShare}>Share</button>
+                    <button className="uk-button uk-button-large uk-button-secondary uk-pulse uk-align-center" onClick={this.handleShare}>Share</button>
+                    <span className="uk-text-center uk-text-danger">{this.state.warning}</span>
+                    </div>
 
                     <table className="uk-table">
                     <thead>
