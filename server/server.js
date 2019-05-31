@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
 const app = express()
 const PORT = process.env.PORT || 8080
+const path = require('path')
 // Route requires
 const user = require('./routes/user')
 const post = require('./routes/post')
@@ -22,7 +23,7 @@ app.use(bodyParser.json())
 
 // Serve up static assets (usually on Heroku)
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static("client/build"));
+	app.use(express.static(path.join(__dirname, '../build')));
 }
 
 // Sessions
