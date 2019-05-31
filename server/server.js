@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 
 // Serve up static assets (usually on Heroku)
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, '../build')));
+	app.use('/',express.static(path.join(__dirname, '../build')));
 }
 
 // Sessions
