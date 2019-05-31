@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg'; // add logo later maybe
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 // components
